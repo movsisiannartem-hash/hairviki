@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HAIR VIKKI — Студия выпрямления и реконструкции волос | Казань</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: #FFFFFF;
+      color: #1C1714;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background-color: #BA8D7A;
+      color: #FFFFFF;
+    }
+
+    /* ==================== HERO SECTION ==================== */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      background: linear-gradient(180deg, #FAF7F2 0%, #F7F2EA 58%, #F1EAE0 100%);
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .bg-glow {
+      display: none;
+      position: absolute;
+      width: 760px;
+      height: 760px;
+      left: 65%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(186, 141, 122, 0.14) 0%, rgba(186, 141, 122, 0) 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ==================== 1. HEADER ==================== */
+    .site-header {
+      position: relative;
+      z-index: 30;
+      width: 100%;
+      padding: 18px 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      line-height: 1.15;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #26221F;
+      transition: color 0.2s ease;
+    }
+
+    .brand-logo:hover .brand-title {
+      color: #BA8D7A;
+    }
+
+    .brand-sub {
+      font-size: 7.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9E958C;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    /* Mobile Hamburger Button */
+    .hamburger-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      margin-right: -8px;
+      background: transparent;
+      border: none;
+      color: #1C1714;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .hamburger-btn:hover {
+      opacity: 0.7;
+    }
+
+    /* Mobile Navigation Drawer */
+    .mobile-menu-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(250, 247, 242, 0.96);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 24px 36px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+
+    .mobile-menu-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .mobile-menu-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mobile-menu-close {
+      width: 40px;
+      height: 40px;
+      margin-right: -8px;
+      background: transparent;
+      border: none;
+      color: #1C1714;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .mobile-menu-links {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .mobile-menu-link {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 34px;
+      font-weight: 400;
+      color: #1C1714;
+      text-decoration: none;
+      line-height: 1.1;
+      transition: color 0.2s ease;
+    }
+
+    .mobile-menu-link:hover,
+    .mobile-menu-link.active {
+      color: #BA8D7A;
+    }
+
+    .mobile-menu-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-top: 20px;
+      border-top: 1px solid #E5DDD2;
+    }
+
+    .mobile-menu-phone {
+      font-size: 14px;
+      font-weight: 500;
+      color: #4A443E;
+      text-decoration: none;
+    }
+
+    /* Desktop Frosted Glass Navigation Capsule */
+    .nav-capsule {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 9999px;
+      padding: 6px;
+      box-shadow: 0 4px 20px -2px rgba(186, 141, 122, 0.08);
+    }
+
+    .nav-link {
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #7A7269;
+      text-decoration: none;
+      border-radius: 9999px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: #1C1714;
+    }
+
+    .nav-link.active {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #1C1714;
+      font-weight: 600;
+      padding: 8px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.98);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Desktop Header Right (Hidden on Mobile) */
+    .header-right {
+      display: none;
+      align-items: center;
+      gap: 18px;
+      flex-shrink: 0;
+    }
+
+    .header-phone {
+      font-size: 12px;
+      font-weight: 500;
+      color: #4A443E;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s ease;
+    }
+
+    .header-phone:hover {
+      color: #1C1714;
+    }
+
+    .btn-header-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 8px 6px 20px;
+      border-radius: 9999px;
+      background-color: #FFFFFF;
+      color: #1C1714;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid #E8E1D5;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .btn-header-white:hover {
+      border-color: #1C1714;
+      transform: scale(1.02);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn-circle-sm {
+      width: 24px;
+      height: 24px;
+      border-radius: 9999px;
+      background-color: #1C1714;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
+
+    .btn-header-white:hover .btn-circle-sm,
+    .btn-pill-primary:hover .btn-circle-md,
+    .btn-pill-outline:hover .btn-circle-md {
+      transform: rotate(45deg);
+    }
+
+    .arrow-svg {
+      width: 11px;
+      height: 11px;
+      display: block;
+    }
+
+    /* ==================== 2. GIANT MASTHEAD "HAIR VIKKI" (Mobile: 2 lines) ==================== */
+    .masthead-wrap {
+      position: absolute;
+      top: 66px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .masthead-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(6.4rem, 33vw, 11.5rem);
+      font-weight: 400;
+      line-height: 0.78;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: rgba(190, 152, 134, 0.42);
+      user-select: none;
+      pointer-events: none;
+      text-align: center;
+      width: 100%;
+      display: block;
+    }
+
+    .masthead-line {
+      display: block;
+    }
+
+    .masthead-space {
+      display: none;
+    }
+
+    /* ==================== 3. MODEL PHOTO (Mobile: Center-Right, Soft Blend on Left) ==================== */
+    .model-wrap {
+      position: absolute;
+      top: 21%;
+      right: -18%;
+      bottom: -2%;
+      width: 120%;
+      max-width: 560px;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      justify-content: flex-end;
+      -webkit-mask-image:
+        linear-gradient(108deg, transparent 10%, rgba(0,0,0,0.08) 32%, rgba(0,0,0,0.75) 56%, #000 72%),
+        linear-gradient(0deg, transparent 0%, #000 14%);
+      -webkit-mask-composite: source-in;
+      mask-image:
+        linear-gradient(108deg, transparent 10%, rgba(0,0,0,0.08) 32%, rgba(0,0,0,0.75) 56%, #000 72%),
+        linear-gradient(0deg, transparent 0%, #000 14%);
+      mask-composite: intersect;
+    }
+
+    .model-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 54% top;
+      display: block;
+    }
+
+    /* ==================== 4. OVERLAY CONTENT (Mobile: Directly over bg, no card) ==================== */
+    .hero-content {
+      position: relative;
+      z-index: 20;
+      width: 100%;
+      min-width: 0;
+      margin-top: auto;
+      padding: 40vh 20px 26px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-left {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      background: transparent;
+      padding: 0;
+    }
+
+    .eyebrow-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .eyebrow-text {
+      font-size: 9.5px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: #8F6D5C;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .eyebrow-line {
+      display: block;
+      height: 1px;
+      flex: 1;
+      max-width: 96px;
+      background-color: rgba(158, 121, 103, 0.35);
+    }
+
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.15rem, 9.6vw, 2.85rem);
+      color: #1C1714;
+      line-height: 1.03;
+      letter-spacing: -0.015em;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    .br-desktop {
+      display: none;
+    }
+
+    .br-mobile {
+      display: inline;
+    }
+
+    /* Mobile Buttons: Stacked Vertically */
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .btn-pill-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 9px 9px 9px 22px;
+      border-radius: 9999px;
+      background-color: #1C1714;
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+
+    .btn-pill-primary:hover {
+      background-color: #000000;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(28, 23, 20, 0.25);
+    }
+
+    .btn-pill-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 9px 9px 9px 22px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #1C1714;
+      border: 1px solid #D9CFC3;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+
+    .btn-pill-outline:hover {
+      background: #FFFFFF;
+      border-color: #1C1714;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06);
+    }
+
+    .btn-circle-md {
+      width: 28px;
+      height: 28px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
+
+    .btn-circle-light {
+      background-color: rgba(255, 255, 255, 0.16);
+      color: #FFFFFF;
+    }
+
+    .btn-circle-dark {
+      background-color: #1C1714;
+      color: #FFFFFF;
+    }
+
+    /* Rating card & Founder label at bottom left on mobile */
+    .hero-right {
+      margin-top: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .rating-card {
+      display: block;
+      width: 204px;
+      padding: 13px 15px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.74);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      box-shadow: 0 8px 28px rgba(186, 141, 122, 0.08);
+      text-decoration: none;
+      text-align: left;
+      margin-bottom: 12px;
+      transition: all 0.25s ease;
+    }
+
+    .rating-card:hover {
+      background: #FFFFFF;
+      transform: scale(1.02);
+    }
+
+    .rating-stars {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      color: #F59E0B;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .rating-score {
+      font-weight: 700;
+      color: #26221F;
+      margin-left: 4px;
+      font-size: 12px;
+    }
+
+    .rating-platform {
+      font-size: 11px;
+      font-weight: 600;
+      color: #26221F;
+      line-height: 1.25;
+      transition: color 0.2s ease;
+    }
+
+    .rating-card:hover .rating-platform {
+      color: #BA8D7A;
+    }
+
+    .rating-meta {
+      font-size: 10px;
+      color: #8E857C;
+      margin-top: 2px;
+    }
+
+    .founder-label {
+      font-size: 8.5px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: #7D746B;
+      font-weight: 500;
+    }
+
+    /* ==================== CURVE & NEXT SECTION ==================== */
+    .dome-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      z-index: 20;
+      background-color: #F1EAE0;
+      pointer-events: none;
+    }
+
+    .dome-svg {
+      display: block;
+      width: 100%;
+      height: 52px;
+    }
+
+    .next-section {
+      position: relative;
+      background-color: #FFFFFF;
+      width: 100%;
+      padding: 64px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #7A7269;
+    }
+
+    .next-inner {
+      max-width: 896px;
+      margin: 0 auto;
+    }
+
+    .next-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .next-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 9999px;
+      background-color: #BA8D7A;
+    }
+
+    .next-title {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #26221F;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .next-sub {
+      color: #9E958C;
+    }
+
+    /* ==================== TWEAKS FOR LARGER PHONES (414px - 767px) ==================== */
+    @media (min-width: 414px) and (max-width: 1023px) {
+      .hero-content {
+        padding: 42vh 22px 28px;
+      }
+      .model-wrap {
+        max-width: 560px;
+      }
+    }
+
+    @media (min-width: 640px) and (max-width: 1023px) {
+      .site-header { padding: 20px 32px 0; }
+      .masthead-title { font-size: 135px; }
+      .model-wrap { right: 0; width: 78%; max-width: 580px; }
+      .hero-content { padding: 44vh 32px 32px; }
+      .dome-svg { height: 76px; }
+    }
+
+    /* ==================== DESKTOP VERSION (>= 1024px) ==================== */
+    @media (min-width: 1024px) {
+      .hero-section {
+        height: 100vh;
+        min-height: 640px;
+      }
+
+      .bg-glow {
+        display: block;
+      }
+
+      .site-header {
+        padding: 22px 44px 0;
+      }
+
+      .brand-title {
+        font-size: 15px;
+        letter-spacing: 0.24em;
+      }
+
+      .brand-sub {
+        font-size: 8px;
+        letter-spacing: 0.26em;
+      }
+
+      .hamburger-btn {
+        display: none;
+      }
+
+      .nav-capsule {
+        display: flex;
+        transform: translateX(-54px);
+      }
+
+      .header-right {
+        display: flex;
+      }
+
+      /* Single-line full-width Masthead on Desktop */
+      .masthead-wrap {
+        top: 11%;
+        padding: 0 20px;
+      }
+
+      .masthead-title {
+        font-size: clamp(4.5rem, 17.5vw, 22rem);
+        line-height: 0.78;
+        letter-spacing: -0.025em;
+        color: rgba(190, 152, 134, 0.50);
+        white-space: nowrap;
+      }
+
+      .masthead-line {
+        display: inline;
+      }
+
+      .masthead-space {
+        display: inline;
+      }
+
+      /* Girl slightly smaller (top 11%, height ~90%), positioned right so header nav never touches her head */
+      .model-wrap {
+        position: absolute;
+        top: 11%;
+        bottom: -1%;
+        left: 38.5%;
+        right: auto;
+        width: auto;
+        max-width: none;
+        display: block;
+        overflow: visible;
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
+
+      .model-img {
+        width: auto;
+        max-width: none;
+        height: 100%;
+        object-fit: contain;
+        object-position: top left;
+        filter: drop-shadow(0 25px 50px rgba(186, 141, 122, 0.18));
+      }
+
+      .hero-content {
+        flex: 1 1 auto;
+        margin-top: 0;
+        padding: 0;
+        position: relative;
+      }
+
+      /* Enlarged Left Block without Subtitle */
+      .hero-left {
+        position: absolute;
+        left: 44px;
+        bottom: 14%;
+        max-width: 45%;
+        padding: 0;
+      }
+
+      .eyebrow-row {
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .eyebrow-text {
+        font-size: 12px;
+        letter-spacing: 0.24em;
+        color: #9E7967;
+      }
+
+      .eyebrow-line {
+        flex: none;
+        width: 128px;
+        max-width: none;
+        background-color: #DBD1C6;
+      }
+
+      .hero-h1 {
+        font-size: clamp(2.5rem, 3.85vw, 4.15rem);
+        line-height: 1.05;
+        margin-bottom: 30px;
+      }
+
+      .br-desktop {
+        display: inline;
+      }
+
+      .br-mobile {
+        display: none;
+      }
+
+      .hero-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .btn-pill-primary,
+      .btn-pill-outline {
+        padding: 13px 13px 13px 28px;
+        gap: 16px;
+        font-size: 13.5px;
+      }
+
+      .btn-circle-md {
+        width: 32px;
+        height: 32px;
+      }
+
+      .arrow-svg {
+        width: 13px;
+        height: 13px;
+      }
+
+      .hero-right {
+        position: absolute;
+        right: 28px;
+        bottom: 10%;
+        margin: 0;
+        align-items: flex-end;
+        text-align: right;
+      }
+
+      .rating-card {
+        width: 212px;
+        padding: 14px 16px;
+        margin-bottom: 8px;
+        background: rgba(255, 255, 255, 0.88);
+      }
+
+      .founder-label {
+        background: rgba(250, 247, 242, 0.88);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 5px 12px;
+        border-radius: 9999px;
+        color: #5E554D;
+      }
+
+      .dome-svg {
+        height: 112px;
+      }
+    }
+
+    @media (min-width: 1024px) and (min-aspect-ratio: 17/10) {
+      .model-wrap {
+        left: 39%;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .site-header {
+        padding: 24px 48px 0;
+      }
+      .nav-capsule {
+        transform: translateX(-60px);
+      }
+      .hero-left {
+        left: 48px;
+        bottom: 15%;
+      }
+      .hero-right {
+        right: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="hero-section">
+
+    <!-- Soft ambient glow behind girl -->
+    <div class="bg-glow"></div>
+
+    <!-- ==================== 1. HEADER ==================== -->
+    <header class="site-header">
+      
+      <!-- Left: Logo -->
+      <a href="#" class="brand-logo" aria-label="HAIR VIKKI">
+        <span class="brand-title">HAIR VIKKI</span>
+        <span class="brand-sub">Студия волос • Казань</span>
+      </a>
+
+      <!-- Mobile: Minimalist 3-line Hamburger -->
+      <button type="button" class="hamburger-btn" id="mobile-menu-open" aria-label="Открыть меню" aria-expanded="false">
+        <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="1" y1="2" x2="23" y2="2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="1" y1="9" x2="23" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="1" y1="16" x2="23" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- Desktop Center: Frosted Glass Capsule -->
+      <nav class="nav-capsule" aria-label="Навигация">
+        <a href="#" class="nav-link active">Главная</a>
+        <a href="#services" class="nav-link">Услуги</a>
+        <a href="#gallery" class="nav-link">Галерея</a>
+        <a href="#reviews" class="nav-link">Отзывы</a>
+        <a href="#contacts" class="nav-link">Контакты</a>
+      </nav>
+
+      <!-- Desktop Right: Phone + Online Booking Button -->
+      <div class="header-right">
+        <a href="tel:+79934190520" class="header-phone">+7 (993) 419-05-20</a>
+
+        <a href="https://yandex.ru/maps/org/kazan/185873254372/" target="_blank" rel="noopener noreferrer" class="btn-header-white">
+          <span>Запись онлайн</span>
+          <span class="btn-circle-sm">
+            <svg class="arrow-svg" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.5 11.5L11.5 4.5M11.5 4.5H6.5M11.5 4.5V9.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+
+    </header>
+
+    <!-- ==================== 2. GIANT MASTHEAD "HAIR VIKKI" ==================== -->
+    <div class="masthead-wrap">
+      <span class="masthead-title">
+        <span class="masthead-line">HAIR</span><span class="masthead-space">&nbsp;</span><span class="masthead-line">VIKKI</span>
+      </span>
+    </div>
+
+    <!-- ==================== 3. LARGE MODEL PHOTO ==================== -->
+    <div class="model-wrap">
+      <img src="assets/hair-model-hero.png" 
+           alt="Кератиновое выпрямление волос Hair Vikki Казань" 
+           class="model-img">
+    </div>
+
+    <!-- ==================== 4. LEFT TEXT BLOCK & RIGHT RATING CARD ==================== -->
+    <div class="hero-content">
+      
+      <!-- Left Editorial Block -->
+      <div class="hero-left">
+        <div class="eyebrow-row">
+          <span class="eyebrow-text">Казань • ул. Пушкина, 1/55а</span>
+          <span class="eyebrow-line"></span>
+        </div>
+
+        <h1 class="hero-h1">
+          Студия<br class="br-mobile"> реконструкции<br> и эстетики волос
+        </h1>
+
+        <div class="hero-actions">
+          <a href="https://yandex.ru/maps/org/kazan/185873254372/" target="_blank" rel="noopener noreferrer" class="btn-pill-primary">
+            <span>Записаться на сеанс</span>
+            <span class="btn-circle-md btn-circle-light">
+              <svg class="arrow-svg" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 11.5L11.5 4.5M11.5 4.5H6.5M11.5 4.5V9.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+
+          <a href="#services" class="btn-pill-outline">
+            <span>О процедурах</span>
+            <span class="btn-circle-md btn-circle-dark">
+              <svg class="arrow-svg" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 11.5L11.5 4.5M11.5 4.5H6.5M11.5 4.5V9.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Rating Card & Founder -->
+      <div class="hero-right">
+        <a href="https://yandex.ru/maps/org/kazan/185873254372/" target="_blank" rel="noopener noreferrer" class="rating-card">
+          <div class="rating-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            <span class="rating-score">5.0</span>
+          </div>
+          <div class="rating-platform">Яндекс Карты</div>
+          <div class="rating-meta">180+ оценок • «Хорошее место»</div>
+        </a>
+
+        <span class="founder-label">Виктория Шашерина • Основатель</span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ==================== MOBILE NAVIGATION OVERLAY ==================== -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay" aria-hidden="true">
+    <div class="mobile-menu-top">
+      <a href="#" class="brand-logo" aria-label="HAIR VIKKI">
+        <span class="brand-title">HAIR VIKKI</span>
+        <span class="brand-sub">Студия волос • Казань</span>
+      </a>
+      <button type="button" class="mobile-menu-close" id="mobile-menu-close" aria-label="Закрыть меню">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="3" y1="3" x2="19" y2="19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="19" y1="3" x2="3" y2="19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="mobile-menu-links" aria-label="Мобильная навигация">
+      <a href="#" class="mobile-menu-link active">Главная</a>
+      <a href="#services" class="mobile-menu-link">Услуги</a>
+      <a href="#gallery" class="mobile-menu-link">Галерея</a>
+      <a href="#reviews" class="mobile-menu-link">Отзывы</a>
+      <a href="#contacts" class="mobile-menu-link">Контакты</a>
+    </nav>
+
+    <div class="mobile-menu-footer">
+      <a href="tel:+79934190520" class="mobile-menu-phone">+7 (993) 419-05-20</a>
+      <a href="https://yandex.ru/maps/org/kazan/185873254372/" target="_blank" rel="noopener noreferrer" class="btn-pill-primary">
+        <span>Записаться на сеанс</span>
+        <span class="btn-circle-md btn-circle-light">
+          <svg class="arrow-svg" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.5 11.5L11.5 4.5M11.5 4.5H6.5M11.5 4.5V9.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ==================== INVERTED WHITE DOME CURVE ==================== -->
+  <div class="dome-wrap">
+    <svg class="dome-svg" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none">
+      <path d="M0,120 Q720,0 1440,120 L1440,120 L0,120 Z" fill="#FFFFFF"/>
+    </svg>
+  </div>
+
+  <!-- ==================== NEXT SECTION ==================== -->
+  <section class="next-section">
+    <div class="next-inner">
+      <div class="next-badge">
+        <span class="next-dot"></span>
+        <span class="next-title">Hair Vikki Studio • Казань</span>
+      </div>
+      <p class="next-sub">Листайте вниз для выбора процедуры и расчета стоимости</p>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var openBtn = document.getElementById('mobile-menu-open');
+      var closeBtn = document.getElementById('mobile-menu-close');
+      var overlay = document.getElementById('mobile-menu-overlay');
+      if (!openBtn || !closeBtn || !overlay) return;
+
+      function setMenuOpen(isOpen) {
+        overlay.classList.toggle('open', isOpen);
+        overlay.setAttribute('aria-hidden', String(!isOpen));
+        openBtn.setAttribute('aria-expanded', String(isOpen));
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      }
+
+      openBtn.addEventListener('click', function () {
+        setMenuOpen(true);
+      });
+
+      closeBtn.addEventListener('click', function () {
+        setMenuOpen(false);
+      });
+
+      var links = overlay.querySelectorAll('.mobile-menu-link');
+      links.forEach(function (link) {
+        link.addEventListener('click', function () {
+          setMenuOpen(false);
+        });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) {
+          setMenuOpen(false);
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
