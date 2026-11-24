@@ -20,7 +20,7 @@
     }
 
     body {
-      background-color: #FFFFFF;
+      background-color: #F4EEE5;
       color: #1C1714;
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       -webkit-font-smoothing: antialiased;
@@ -37,10 +37,12 @@
       width: 100%;
       background: linear-gradient(180deg, #FAF7F2 0%, #F7F2EA 58%, #F1EAE0 100%);
       min-height: 100svh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       overflow: hidden;
+      isolation: isolate;
     }
 
     .bg-glow {
@@ -307,33 +309,30 @@
       display: block;
     }
 
-    /* ==================== 2. GIANT MASTHEAD "HAIR VIKKI" (Mobile: 2 lines) ==================== */
+    /* ==================== 2. GIANT MASTHEAD "HAIR VIKKI" (Mobile: 2 staggered lines) ==================== */
     .masthead-wrap {
       position: absolute;
       top: 66px;
       left: 0;
       right: 0;
       width: 100%;
-      padding: 0 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding: 0 16px;
+      display: block;
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
       overflow: hidden;
     }
 
     .masthead-title {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(6.4rem, 33vw, 11.5rem);
+      font-size: clamp(5.2rem, 26.8vw, 7.8rem);
       font-weight: 400;
-      line-height: 0.78;
+      line-height: 0.82;
       letter-spacing: -0.02em;
       text-transform: uppercase;
-      color: rgba(190, 152, 134, 0.42);
+      color: rgba(190, 152, 134, 0.46);
       user-select: none;
       pointer-events: none;
-      text-align: center;
       width: 100%;
       display: block;
     }
@@ -342,38 +341,70 @@
       display: block;
     }
 
+    .masthead-line--top {
+      text-align: left;
+    }
+
+    .masthead-line--bottom {
+      text-align: right;
+      margin-top: -0.07em;
+    }
+
     .masthead-space {
       display: none;
     }
 
-    /* ==================== 3. MODEL PHOTO (Mobile: Center-Right, Soft Blend on Left) ==================== */
+    /* ==================== 3. MODEL PHOTO (Mobile: Solid Head over VIKKI, Bottom Fade) ==================== */
     .model-wrap {
       position: absolute;
-      top: 21%;
-      right: -18%;
-      bottom: -2%;
-      width: 120%;
-      max-width: 560px;
+      top: 4.5%;
+      right: -8%;
+      bottom: 0;
+      width: 116%;
+      max-width: 540px;
       z-index: 10;
       pointer-events: none;
       display: flex;
       justify-content: flex-end;
-      -webkit-mask-image:
-        linear-gradient(108deg, transparent 10%, rgba(0,0,0,0.08) 32%, rgba(0,0,0,0.75) 56%, #000 72%),
-        linear-gradient(0deg, transparent 0%, #000 14%);
-      -webkit-mask-composite: source-in;
-      mask-image:
-        linear-gradient(108deg, transparent 10%, rgba(0,0,0,0.08) 32%, rgba(0,0,0,0.75) 56%, #000 72%),
-        linear-gradient(0deg, transparent 0%, #000 14%);
-      mask-composite: intersect;
+      /* Only fade bottom cape edge well above bottom; keep head & upper hair 100% opaque above VIKKI */
+      -webkit-mask-image: linear-gradient(0deg, transparent 2%, rgba(0, 0, 0, 0.55) 10%, #000 22%);
+      mask-image: linear-gradient(0deg, transparent 2%, rgba(0, 0, 0, 0.55) 10%, #000 22%);
+    }
+
+    .model-picture {
+      display: block;
+      width: 100%;
+      height: 100%;
     }
 
     .model-img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: 54% top;
+      object-fit: contain;
+      object-position: right top;
       display: block;
+    }
+
+    /* Seamless localized cream mist strictly in the lower-left text region (no box edges, preserves rich hair on right) */
+    .mobile-text-mist {
+      position: absolute;
+      inset: 0;
+      z-index: 12;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          ellipse 58% 22% at 24% 61%,
+          rgba(244, 238, 229, 0.96) 0%,
+          rgba(244, 238, 229, 0.88) 44%,
+          rgba(244, 238, 229, 0.42) 72%,
+          rgba(244, 238, 229, 0) 100%
+        ),
+        radial-gradient(
+          ellipse 52% 24% at 18% 83%,
+          rgba(244, 238, 229, 0.94) 0%,
+          rgba(244, 238, 229, 0.76) 44%,
+          rgba(244, 238, 229, 0) 100%
+        );
     }
 
     /* ==================== 4. OVERLAY CONTENT (Mobile: Directly over bg, no card) ==================== */
@@ -383,7 +414,7 @@
       width: 100%;
       min-width: 0;
       margin-top: auto;
-      padding: 40vh 20px 26px;
+      padding: 0 20px calc(22px + env(safe-area-inset-bottom));
       display: flex;
       flex-direction: column;
     }
@@ -391,7 +422,7 @@
     .hero-left {
       position: relative;
       width: 100%;
-      max-width: 340px;
+      max-width: 360px;
       background: transparent;
       padding: 0;
     }
@@ -422,12 +453,20 @@
 
     .hero-h1 {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(2.15rem, 9.6vw, 2.85rem);
+      font-size: clamp(2.05rem, 8.8vw, 2.6rem);
       color: #1C1714;
-      line-height: 1.03;
+      line-height: 1.04;
       letter-spacing: -0.015em;
       font-weight: 400;
       margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+      display: none;
+    }
+
+    .hero-trust {
+      display: none;
     }
 
     .br-desktop {
@@ -443,15 +482,16 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 10px;
+      gap: 11px;
     }
 
     .btn-pill-primary {
       display: inline-flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      padding: 9px 9px 9px 22px;
+      gap: 16px;
+      min-width: 222px;
+      padding: 8px 8px 8px 22px;
       border-radius: 9999px;
       background-color: #1C1714;
       color: #FFFFFF;
@@ -472,14 +512,15 @@
       display: inline-flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      padding: 9px 9px 9px 22px;
+      gap: 16px;
+      min-width: 184px;
+      padding: 8px 8px 8px 22px;
       border-radius: 9999px;
-      background: rgba(255, 255, 255, 0.72);
+      background: rgba(255, 255, 255, 0.76);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       color: #1C1714;
-      border: 1px solid #D9CFC3;
+      border: 1px solid rgba(28, 23, 20, 0.20);
       font-size: 12px;
       font-weight: 600;
       text-decoration: none;
@@ -528,14 +569,14 @@
       width: 204px;
       padding: 13px 15px;
       border-radius: 16px;
-      background: rgba(255, 255, 255, 0.74);
+      background: rgba(255, 255, 255, 0.78);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.94);
       box-shadow: 0 8px 28px rgba(186, 141, 122, 0.08);
       text-decoration: none;
       text-align: left;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       transition: all 0.25s ease;
     }
 
@@ -586,69 +627,24 @@
       font-weight: 500;
     }
 
-    /* ==================== CURVE & NEXT SECTION ==================== */
-    .dome-wrap {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      line-height: 0;
-      z-index: 20;
-      background-color: #F1EAE0;
-      pointer-events: none;
+    @media (max-width: 1023px) and (max-height: 730px) {
+      .hero-h1 {
+        font-size: clamp(1.85rem, 7.6vw, 2.25rem);
+        margin-bottom: 14px;
+      }
+      .hero-right {
+        margin-top: 14px;
+      }
+      .rating-card {
+        padding: 10px 13px;
+        margin-bottom: 10px;
+      }
     }
 
-    .dome-svg {
-      display: block;
-      width: 100%;
-      height: 52px;
-    }
-
-    .next-section {
-      position: relative;
-      background-color: #FFFFFF;
-      width: 100%;
-      padding: 64px 24px;
-      text-align: center;
-      font-size: 12px;
-      color: #7A7269;
-    }
-
-    .next-inner {
-      max-width: 896px;
-      margin: 0 auto;
-    }
-
-    .next-badge {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .next-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 9999px;
-      background-color: #BA8D7A;
-    }
-
-    .next-title {
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #26221F;
-      font-weight: 600;
-      font-size: 12px;
-    }
-
-    .next-sub {
-      color: #9E958C;
-    }
-
-    /* ==================== TWEAKS FOR LARGER PHONES (414px - 767px) ==================== */
+    /* ==================== TWEAKS FOR LARGER PHONES / TABLETS (414px - 1023px) ==================== */
     @media (min-width: 414px) and (max-width: 1023px) {
       .hero-content {
-        padding: 42vh 22px 28px;
+        padding: 0 22px calc(24px + env(safe-area-inset-bottom));
       }
       .model-wrap {
         max-width: 560px;
@@ -657,10 +653,10 @@
 
     @media (min-width: 640px) and (max-width: 1023px) {
       .site-header { padding: 20px 32px 0; }
-      .masthead-title { font-size: 135px; }
-      .model-wrap { right: 0; width: 78%; max-width: 580px; }
-      .hero-content { padding: 44vh 32px 32px; }
-      .dome-svg { height: 76px; }
+      .masthead-wrap { padding: 0 28px; }
+      .masthead-title { font-size: clamp(6.5rem, 19vw, 9.5rem); }
+      .model-wrap { right: 0; width: 76%; max-width: 560px; }
+      .hero-content { padding: 0 32px calc(28px + env(safe-area-inset-bottom)); }
     }
 
     /* ==================== DESKTOP VERSION (>= 1024px) ==================== */
@@ -703,31 +699,37 @@
 
       /* Single-line full-width Masthead on Desktop */
       .masthead-wrap {
-        top: 11%;
-        padding: 0 20px;
+        top: 10.5%;
+        padding: 0 22px;
+        text-align: center;
       }
 
       .masthead-title {
-        font-size: clamp(4.5rem, 17.5vw, 22rem);
+        font-size: clamp(4.5rem, 18.2vw, 22.5rem);
         line-height: 0.78;
         letter-spacing: -0.025em;
-        color: rgba(190, 152, 134, 0.50);
+        color: rgba(190, 152, 134, 0.52);
         white-space: nowrap;
+        text-align: center;
       }
 
       .masthead-line {
         display: inline;
       }
 
+      .masthead-line--bottom {
+        margin-top: 0;
+      }
+
       .masthead-space {
         display: inline;
       }
 
-      /* Girl slightly smaller (top 11%, height ~90%), positioned right so header nav never touches her head */
+      /* Keep crown clear of top header phone & nav capsule on 16:10/4:3 desktop screens */
       .model-wrap {
         position: absolute;
-        top: 11%;
-        bottom: -1%;
+        top: 9.5%;
+        bottom: 0;
         left: 38.5%;
         right: auto;
         width: auto;
@@ -738,13 +740,23 @@
         mask-image: none;
       }
 
+      .model-picture {
+        display: block;
+        width: auto;
+        height: 100%;
+      }
+
       .model-img {
         width: auto;
         max-width: none;
         height: 100%;
         object-fit: contain;
         object-position: top left;
-        filter: drop-shadow(0 25px 50px rgba(186, 141, 122, 0.18));
+        filter: drop-shadow(0 25px 50px rgba(186, 141, 122, 0.16));
+      }
+
+      .mobile-text-mist {
+        display: none;
       }
 
       .hero-content {
@@ -754,12 +766,12 @@
         position: relative;
       }
 
-      /* Enlarged Left Block without Subtitle */
+      /* Desktop Left Block matching Reference 4 */
       .hero-left {
         position: absolute;
         left: 44px;
-        bottom: 14%;
-        max-width: 45%;
+        bottom: 7.5%;
+        max-width: 44%;
         padding: 0;
       }
 
@@ -769,9 +781,9 @@
       }
 
       .eyebrow-text {
-        font-size: 12px;
+        font-size: 11px;
         letter-spacing: 0.24em;
-        color: #9E7967;
+        color: #8F6D5C;
       }
 
       .eyebrow-line {
@@ -782,9 +794,40 @@
       }
 
       .hero-h1 {
-        font-size: clamp(2.5rem, 3.85vw, 4.15rem);
+        font-size: clamp(2.35rem, 3.65vw, 3.65rem);
         line-height: 1.05;
-        margin-bottom: 30px;
+        margin-bottom: 16px;
+      }
+
+      .hero-subtitle {
+        display: block;
+        font-size: clamp(13px, 1.05vw, 15px);
+        line-height: 1.5;
+        color: #6B6259;
+        font-weight: 400;
+        margin-bottom: 24px;
+        max-width: 430px;
+      }
+
+      .hero-trust {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .trust-item {
+        font-size: 11.5px;
+        line-height: 1.32;
+        color: #7D746B;
+        font-weight: 400;
+      }
+
+      .trust-divider {
+        width: 1px;
+        height: 28px;
+        background-color: rgba(158, 121, 103, 0.26);
+        flex-shrink: 0;
       }
 
       .br-desktop {
@@ -804,25 +847,26 @@
 
       .btn-pill-primary,
       .btn-pill-outline {
-        padding: 13px 13px 13px 28px;
+        min-width: auto;
+        padding: 12px 12px 12px 26px;
         gap: 16px;
-        font-size: 13.5px;
+        font-size: 13px;
       }
 
       .btn-circle-md {
-        width: 32px;
-        height: 32px;
+        width: 30px;
+        height: 30px;
       }
 
       .arrow-svg {
-        width: 13px;
-        height: 13px;
+        width: 12px;
+        height: 12px;
       }
 
       .hero-right {
         position: absolute;
-        right: 28px;
-        bottom: 10%;
+        right: 32px;
+        bottom: 9%;
         margin: 0;
         align-items: flex-end;
         text-align: right;
@@ -831,27 +875,24 @@
       .rating-card {
         width: 212px;
         padding: 14px 16px;
-        margin-bottom: 8px;
-        background: rgba(255, 255, 255, 0.88);
+        margin-bottom: 10px;
+        background: rgba(255, 255, 255, 0.90);
       }
 
       .founder-label {
-        background: rgba(250, 247, 242, 0.88);
+        background: rgba(250, 247, 242, 0.86);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         padding: 5px 12px;
         border-radius: 9999px;
         color: #5E554D;
       }
-
-      .dome-svg {
-        height: 112px;
-      }
     }
 
     @media (min-width: 1024px) and (min-aspect-ratio: 17/10) {
       .model-wrap {
-        left: 39%;
+        top: 3.5%;
+        left: 38.5%;
       }
     }
 
@@ -860,14 +901,14 @@
         padding: 24px 48px 0;
       }
       .nav-capsule {
-        transform: translateX(-60px);
+        transform: translateX(-64px);
       }
       .hero-left {
         left: 48px;
-        bottom: 15%;
+        bottom: 7%;
       }
       .hero-right {
-        right: 36px;
+        right: 38px;
       }
     }
   </style>
@@ -924,18 +965,24 @@
     </header>
 
     <!-- ==================== 2. GIANT MASTHEAD "HAIR VIKKI" ==================== -->
-    <div class="masthead-wrap">
+    <div class="masthead-wrap" aria-hidden="true">
       <span class="masthead-title">
-        <span class="masthead-line">HAIR</span><span class="masthead-space">&nbsp;</span><span class="masthead-line">VIKKI</span>
+        <span class="masthead-line masthead-line--top">HAIR</span><span class="masthead-space">&nbsp;</span><span class="masthead-line masthead-line--bottom">VIKKI</span>
       </span>
     </div>
 
     <!-- ==================== 3. LARGE MODEL PHOTO ==================== -->
     <div class="model-wrap">
-      <img src="assets/hair-model-hero.png" 
-           alt="Кератиновое выпрямление волос Hair Vikki Казань" 
-           class="model-img">
+      <picture class="model-picture">
+        <source media="(min-width: 1024px)" srcset="assets/hair-model-hero.png">
+        <img src="assets/hair-model.png"
+             alt="Кератиновое выпрямление волос Hair Vikki Казань"
+             class="model-img">
+      </picture>
     </div>
+
+    <!-- Mobile Localized Text Mist (Strictly below head crown, behind overlay text) -->
+    <div class="mobile-text-mist" aria-hidden="true"></div>
 
     <!-- ==================== 4. LEFT TEXT BLOCK & RIGHT RATING CARD ==================== -->
     <div class="hero-content">
@@ -950,6 +997,11 @@
         <h1 class="hero-h1">
           Студия<br class="br-mobile"> реконструкции<br> и эстетики волос
         </h1>
+
+        <p class="hero-subtitle">
+          Безопасное выпрямление и зеркальный блеск<br>
+          без потери объёма и повреждения длины.
+        </p>
 
         <div class="hero-actions">
           <a href="https://yandex.ru/maps/org/kazan/185873254372/" target="_blank" rel="noopener noreferrer" class="btn-pill-primary">
@@ -969,6 +1021,14 @@
               </svg>
             </span>
           </a>
+        </div>
+
+        <div class="hero-trust">
+          <span class="trust-item">Премиальный<br>уход</span>
+          <span class="trust-divider" aria-hidden="true"></span>
+          <span class="trust-item">Индивидуальный<br>подход</span>
+          <span class="trust-divider" aria-hidden="true"></span>
+          <span class="trust-item">Результат<br>надолго</span>
         </div>
       </div>
 
@@ -1025,24 +1085,6 @@
       </a>
     </div>
   </div>
-
-  <!-- ==================== INVERTED WHITE DOME CURVE ==================== -->
-  <div class="dome-wrap">
-    <svg class="dome-svg" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none">
-      <path d="M0,120 Q720,0 1440,120 L1440,120 L0,120 Z" fill="#FFFFFF"/>
-    </svg>
-  </div>
-
-  <!-- ==================== NEXT SECTION ==================== -->
-  <section class="next-section">
-    <div class="next-inner">
-      <div class="next-badge">
-        <span class="next-dot"></span>
-        <span class="next-title">Hair Vikki Studio • Казань</span>
-      </div>
-      <p class="next-sub">Листайте вниз для выбора процедуры и расчета стоимости</p>
-    </div>
-  </section>
 
   <script>
     (function () {
